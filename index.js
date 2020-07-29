@@ -69,17 +69,12 @@ async function downloadVideo(video, type, res) {
             else downloadedStream = ytdl(pickOne[0].link, {
                 quality: "highestaudio"
             });
-        } catch (e) {
-            return res.render("index", {
-                error: "Couldn't find the video!"
-            });
-        }
+        } 
         if (!downloadedStream) return res.render("index", {
             error: "Couldn't find the video!"
         });
         res.attachment(`${pickOne[0].title}.mp4`);
         return downloadedStream.pipe(res);
     }
-}
 
 app.listen(3000, () => console.log("Server started!"));
